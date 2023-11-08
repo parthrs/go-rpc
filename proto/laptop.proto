@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package parthrs.go_rpc;
+
+option go_package = "github.com/parthrs/go-rpc";
+
+import "processor.proto";
+import "memory.proto";
+import "keyboard.proto";
+import "screen.proto";
+import "storage.proto";
+import "google/protobuf/timestamp.proto";
+
+message Laptop {
+  string id = 1;
+  string brand = 2;
+  string name = 3; // Model name
+  CPU cpu = 4;
+  Memory ram = 5;
+  repeated GPU gpus = 6;
+  repeated Storage storages = 7;
+  Screen screen = 8;
+  Keyboard keyboard = 9;
+  oneof weight {
+    double weight_lb = 10; // Why not enum style start with 0 or 1
+    double weight_kg = 11;
+  }
+  double price_usd = 12;
+  uint32 release_year = 13;
+  google.protobuf.Timestamp updated_at = 14;
+}
