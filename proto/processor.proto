@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package parthrs.go_rpc;
 
-option go_package = "github.com/parthrs/go-rpc";
+option go_package = "/go-rpc";
 
 import "memory.proto";
 
@@ -22,7 +22,7 @@ message CPU {
 message GPU {
   string brand = 1;
   string name = 2;
-  string min_ghz = 3;
-  string max_ghz = 4;
+  double min_ghz = 3;
+  double max_ghz = 4;
   Memory memory = 5;
 }

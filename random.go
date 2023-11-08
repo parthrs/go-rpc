@@ -3,8 +3,9 @@ package main
 import (
 	"math/rand"
 
+	gen "go-rpc/gen/go-rpc"
+
 	"github.com/google/uuid"
-	"github.com/parthrs/go-rpc/gen"
 )
 
 func randomBool() bool {

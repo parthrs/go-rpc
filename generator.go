@@ -1,7 +1,7 @@
 package main
 
 import (
-	"gen"
+	gen "go-rpc/gen/go-rpc"
 
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
@@ -10,8 +10,8 @@ import (
 // Layout and Backlit fields
 func NewKeyboard() *gen.Keyboard {
 	keyboard := &gen.Keyboard{
-		layout:  randomKeyboardLayout(),
-		backlit: randomBool(),
+		Layout:  randomKeyboardLayout(),
+		Backlit: randomBool(),
 	}
 	return keyboard
 }
@@ -19,17 +19,17 @@ func NewKeyboard() *gen.Keyboard {
 func NewCPU() *gen.CPU {
 	brand := randomCPUBrand()
 	name := randomCPUName(brand)
-	numCores := int32(randomInt(2, 8))
-	numThreads := int32(randomInt(numCores, 12))
+	numCores := randomInt(2, 8)
+	numThreads := randomInt(numCores, 12)
 	minGhz := randomFloat64(2.0, 3.5)
 	maxGhz := randomFloat64(minGhz, 5.0)
 	cpu := &gen.CPU{
-		Brand:         brand,
-		Name:          name,
-		NumberCores:   numCores,
-		NumberThreads: numThreads,
-		MinGhz:        minGhz,
-		MaxGhz:        maxGhz,
+		Brand:      brand,
+		Name:       name,
+		NumCores:   uint32(numCores),
+		NumThreads: uint32(numThreads),
+		MinGhz:     minGhz,
+		MaxGhz:     maxGhz,
 	}
 	return cpu
 }
@@ -40,12 +40,12 @@ func NewGPU() *gen.GPU {
 	minGhz := randomFloat64(1.0, 1.5)
 	maxGhz := randomFloat64(minGhz, 2.0)
 
-	memory := gen.Memory{
+	memory := &gen.Memory{
 		Value: uint64(randomInt(2, 6)),
 		Unit:  gen.Memory_GIGABYTE,
 	}
 
-	return gen.GPU{
+	return &gen.GPU{
 		Brand:  brand,
 		Name:   name,
 		MinGhz: minGhz,
@@ -65,7 +65,7 @@ func NewRAM() *gen.Memory {
 
 func NewSSD() *gen.Storage {
 	ssd := &gen.Storage{
-		Driver: gen.Storage_SSD,
+		Type: gen.Storage_SSD,
 		Memory: &gen.Memory{
 			Value: uint64(randomInt(128, 1024)),
 			Unit:  gen.Memory_GIGABYTE,
@@ -77,7 +77,7 @@ func NewSSD() *gen.Storage {
 
 func NewHDD() *gen.Storage {
 	hdd := &gen.Storage{
-		Driver: gen.Storage_HDD,
+		Type: gen.Storage_HDD,
 		Memory: &gen.Memory{
 			Value: uint64(randomInt(1, 6)),
 			Unit:  gen.Memory_TERABYTE,

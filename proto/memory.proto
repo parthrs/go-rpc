@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package parthrs.go_rpc;
 
-option go_package = "github.com/parthrs/go-rpc";
+option go_package = "/go-rpc";
 
 message Memory {
   enum Unit {
